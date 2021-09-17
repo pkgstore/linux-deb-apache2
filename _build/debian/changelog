@@ -1,3 +1,10 @@
+apache2 (2.4.49-100) unstable; urgency=medium
+
+  * COMMIT: e7327096118a368bb6a169f00d0ff1b5d3214116.
+  * UPD: Move to DEB Store.
+
+ -- Package Store <kitsune.solar@gmail.com>  Fri, 17 Sep 2021 07:05:32 +0000
+
 apache2 (2.4.49-1) unstable; urgency=medium
 
   * Update upstream GPG keys
