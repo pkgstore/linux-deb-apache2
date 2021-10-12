@@ -1,3 +1,10 @@
+apache2 (2.4.51-102) unstable; urgency=medium
+
+  * COMMIT: 'a1e08141187cc309652042c84d22097ffc9af1ab'.
+  * UPD: 'ask-for-passphrase' to modern bash syntax.
+
+ -- Package Store <kitsune.solar@gmail.com>  Tue, 12 Oct 2021 13:00:00 +0000
+
 apache2 (2.4.51-101) unstable; urgency=medium
 
   * COMMIT: 'a1e08141187cc309652042c84d22097ffc9af1ab'.
