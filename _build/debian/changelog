@@ -1,8 +1,15 @@
-apache2 (2.4.50-100) unstable; urgency=medium
+apache2 (2.4.51-100) unstable; urgency=medium
 
-  * COMMIT: '5d8216a84a03fe38d8e787ea27d4c117f1f6d2cb'.
+  * COMMIT: 'a1e08141187cc309652042c84d22097ffc9af1ab'.
 
- -- Package Store <kitsune.solar@gmail.com>  Wed, 06 Oct 2021 12:05:00 +0300
+ -- Package Store <kitsune.solar@gmail.com>  Tue, 12 Oct 2021 14:00:00 +0000
+
+apache2 (2.4.51-1) unstable; urgency=medium
+
+  * New upstream version 2.4.51 (Closes: CVE-2021-41773, CVE-2021-42013)
+  * Fix apache2ctl (see https://github.com/oerdnj/deb.sury.org/issues/1659)
+
+ -- Yadd <yadd@debian.org>  Thu, 07 Oct 2021 20:35:33 +0200
 
 apache2 (2.4.50-1) unstable; urgency=high
 
