@@ -1,22 +1,70 @@
-apache2 (2.4.51-102) unstable; urgency=medium
+apache2 (2.4.53-100) unstable; urgency=medium
 
-  * COMMIT: 'a1e08141187cc309652042c84d22097ffc9af1ab'.
+  * COMMIT: 'e576aaddefe509afb9009b62e06a3a8ba34d832f'.
+  * UPD: 'apache2ctl' to modern bash syntax.
   * UPD: 'ask-for-passphrase' to modern bash syntax.
 
- -- Package Store <kitsune.solar@gmail.com>  Tue, 12 Oct 2021 13:00:00 +0000
+ -- Package Store <mail@z17.dev>  Thu, 24 Mar 2022 23:25:00 +0300
 
-apache2 (2.4.51-101) unstable; urgency=medium
+apache2 (2.4.53-3) UNRELEASED; urgency=medium
 
-  * COMMIT: 'a1e08141187cc309652042c84d22097ffc9af1ab'.
-  * UPD: 'apache2ctl' to modern bash syntax.
+  [ Simon Deziel ]
+  * Escape literal "." for BrowserMatch directives in setenvif.conf
+  * Use non-capturing regex with FilesMatch directive in default-ssl.conf
 
- -- Package Store <kitsune.solar@gmail.com>  Tue, 12 Oct 2021 12:00:00 +0000
+ -- Simon Deziel <simon@sdeziel.info>  Mon, 14 Mar 2022 13:13:28 -0400
 
-apache2 (2.4.51-100) unstable; urgency=medium
+apache2 (2.4.53-2) unstable; urgency=medium
 
-  * COMMIT: 'a1e08141187cc309652042c84d22097ffc9af1ab'.
+  * Clean useless Conflicts/Replace
+  * apache2-dev: add missing dependency on libpcre2-dev (Closes: #1007254)
 
- -- Package Store <kitsune.solar@gmail.com>  Tue, 12 Oct 2021 11:00:00 +0000
+ -- Yadd <yadd@debian.org>  Tue, 15 Mar 2022 15:27:39 +0100
+
+apache2 (2.4.53-1) unstable; urgency=medium
+
+  * New upstream version 2.4.53 (Closes: CVE-2022-22719,
+    CVE-2022-22720, CVE-2022-22721, CVE-2022-23943)
+  * Update copyright
+  * Patches:
+    + Drop fix-2.4.52-regression.patch, now included in upstream
+    + Refresh fhs_compliance.patch
+    + Update and disable child_processes_fail_to_start.patch
+  * Update test framework
+  * Back to unstable
+
+ -- Yadd <yadd@debian.org>  Mon, 14 Mar 2022 17:10:39 +0100
+
+apache2 (2.4.52-3) experimental; urgency=medium
+
+  * Fix autopkgtest with libpcre2 (autopkgtest still fails due to an SSL
+    error)
+  * Set hardening=+all instead of hardening=+bindnow
+
+ -- Yadd <yadd@debian.org>  Tue, 28 Dec 2021 21:20:05 +0100
+
+apache2 (2.4.52-2) experimental; urgency=medium
+
+  * Build with pcre2 (Closes: #1000114)
+
+ -- Yadd <yadd@debian.org>  Tue, 28 Dec 2021 20:01:43 +0100
+
+apache2 (2.4.52-1) unstable; urgency=medium
+
+  * Refresh suexec-custom.patch
+  * Update lintian overrides
+  * Wrap long lines in changelog entries: 2.4.51-2.
+  * New upstream version 2.4.52 (Closes: CVE-2021-44224, CVE-2021-44790)
+  * Refresh patches
+
+ -- Yadd <yadd@debian.org>  Mon, 20 Dec 2021 18:42:09 +0100
+
+apache2 (2.4.51-2) unstable; urgency=medium
+
+  * Add patch to have new macro_ignore_empty and macro_ignore_bad_nesting
+    parameters
+
+ -- Yadd <yadd@debian.org>  Mon, 25 Oct 2021 18:37:03 +0200
 
 apache2 (2.4.51-1) unstable; urgency=medium
 
@@ -63,8 +111,9 @@ apache2 (2.4.49-2) unstable; urgency=medium
 apache2 (2.4.49-1) unstable; urgency=medium
 
   * Update upstream GPG keys
-  * New upstream version 2.4.49 (Closes: CVE-2021-34798, CVE-2021-36160,
-    CVE-2021-39275, CVE-2021-40438)
+  * New upstream version 2.4.51. Closes: CVE-2021-33193, CVE-2021-34798,
+    CVE-2021-36160, CVE-2021-39275, CVE-2021-40438, CVE-2021-41524,
+    CVE-2021-41773, CVE-2021-42013)
   * Refresh patches
 
  -- Yadd <yadd@debian.org>  Thu, 16 Sep 2021 06:22:23 +0200

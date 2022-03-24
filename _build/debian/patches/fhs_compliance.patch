@@ -1,10 +1,12 @@
 Description: Fix up FHS file locations for apache2 droppings.
 Forwarded: not-needed
 Author: Adam Conrad <adconrad@0c3.net>
-Last-Update: 2012-02-25
+Reviewed-By: Yadd <yadd@debian.org>
+Last-Update: 2022-03-14
+
 --- a/configure
 +++ b/configure
-@@ -40434,17 +40434,17 @@
+@@ -41141,17 +41141,17 @@
  
  
  cat >>confdefs.h <<_ACEOF
@@ -27,7 +29,7 @@ Last-Update: 2012-02-25
  
 --- a/configure.in
 +++ b/configure.in
-@@ -878,11 +878,11 @@
+@@ -901,11 +901,11 @@
  echo $MODLIST | $AWK -f $srcdir/build/build-modules-c.awk > modules.c
  
  APR_EXPAND_VAR(ap_prefix, $prefix)
@@ -53,12 +55,12 @@ Last-Update: 2012-02-25
  #endif /* AP_CONFIG_LAYOUT_H */
 --- a/include/httpd.h
 +++ b/include/httpd.h
-@@ -109,7 +109,7 @@
+@@ -110,7 +110,7 @@
  #define DOCUMENT_LOCATION  HTTPD_ROOT "/docs"
  #else
  /* Set default for non OS/2 file system */
 -#define DOCUMENT_LOCATION  HTTPD_ROOT "/htdocs"
-+#define DOCUMENT_LOCATION  "/var/www/html"
++#define DOCUMENT_LOCATION "/var/www/html"
  #endif
  #endif /* DOCUMENT_LOCATION */
  

@@ -1,5 +1,5 @@
 # Even though one line is very long, it's still hand-editable source code
-source-is-missing docs/manual/style/scripts/prettify.js .*
+source-is-missing docs/manual/style/scripts/prettify.js
 # Variable not exported by pkg-info.mk
 debian-rules-parses-dpkg-parsechangelog (line 15)
 # Upstream framework
@@ -10,5 +10,8 @@ national-encoding debian/perl-framework/t/php/strings3.t
 national-encoding debian/perl-framework/t/php/strings4.t
 # Ignore this
 national-encoding debian/upstream/signing-key.asc
+# False positives
+very-long-line-length-in-source-file docs/*
+very-long-line-length-in-source-file test/modules/http2/htdocs/test1/*
 # Uninstalled files
 missing-notice-file-for-apache-license NOTICE debian/perl-framework/NOTICE
