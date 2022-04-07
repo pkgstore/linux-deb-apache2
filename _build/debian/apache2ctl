@@ -42,7 +42,7 @@ ARGV=( "$@" )
 # |||||||||||||||||||| START CONFIGURATION SECTION  ||||||||||||||||||||
 # --------------------                              --------------------
 #
-# main configuration directory
+# Main configuration directory.
 if [[ -z "${APACHE_CONFDIR}" ]]; then
   if [[ "${0##*apache2ctl-}" != "${0}" ]]; then
     APACHE_CONFDIR="/etc/apache2-${0##*apache2ctl-}"
@@ -62,24 +62,24 @@ case "${SUFFIX}" in
 esac
 APACHE_SYSTEMD_SERVICE="apache2${SUFFIX}"
 
-# the path to the environment variable file
+# The path to the environment variable file.
 [[ -z "${APACHE_ENVVARS}" ]] && APACHE_ENVVARS="${APACHE_CONFDIR}/envvars"
-# pick up any necessary environment variables
+# Pick up any necessary environment variables.
 [[ -f "${APACHE_ENVVARS}" ]] && . ${APACHE_ENVVARS}
 
 [[ "${APACHE_CONFDIR}" != "/etc/apache2" ]] && APACHE_ARGUMENTS="-d ${APACHE_CONFDIR} ${APACHE_ARGUMENTS}"
 
-# the following APACHE_* variables should be set in /etc/apache2/envvars
+# The following "APACHE_*" variables should be set in "/etc/apache2/envvars".
 #
-# the path to your httpd binary, including options if necessary
+# The path to your httpd binary, including options if necessary.
 HTTPD="${APACHE_HTTPD:-/usr/sbin/apache2}"
 #
-# a command that outputs a formatted text version of the HTML at the
+# A command that outputs a formatted text version of the HTML at the
 # url given on the command line.  Designed for lynx, however other
 # programs may work.
 LYNX="${APACHE_LYNX:-www-browser -dump}"
 #
-# the URL to your server's mod_status status page.  If you do not
+# The URL to your server's mod_status status page.  If you do not
 # have one, then status and fullstatus will not work.
 STATUSURL="${APACHE_STATUSURL:-http://localhost:80/server-status}"
 #
@@ -99,14 +99,14 @@ if [[ "x${ULIMIT_MAX_FILES}" != "x" ]] && [[ $( id -u ) == 0 ]]; then
 fi
 
 ERROR=0
-if [[ "${ARGV[*]}" = "" ]] || [[ "${ARGV[*]}" = "usage" ]] || [[ "${ARGV[*]}" = "help" ]] || [[ "${ARGV[*]}" = "--help" ]]; then
+if [[ "${ARGV[*]}" == "" ]] || [[ "${ARGV[*]}" == "usage" ]] || [[ "${ARGV[*]}" == "help" ]] || [[ "${ARGV[*]}" == "--help" ]]; then
   echo "Usage:  ${0} start|stop|restart|graceful|graceful-stop|configtest|status|fullstatus|help" >&2
   echo "        ${0} <apache2 args>" >&2
   echo "        ${0} -h (for help on <apache2 args>)" >&2
   exit 1
 fi
 
-get_status () {
+get_status() {
   if ! ${LYNX} "${STATUSURL}"; then
     echo "'${LYNX} ${STATUSURL}' failed." >&2
     echo "Maybe you need to install a package providing www-browser or you" >&2
@@ -115,18 +115,18 @@ get_status () {
   fi
 }
 
-mkdir_chown () {
+mkdir_chown() {
   local OWNER="${1}"
   local DIR="${2}"
   local STAT; STAT="$( LC_ALL=C stat -c %F:%U ${DIR} 2> /dev/null || true )"
-  if [[ "${STAT}" = "" ]]; then
-    local TMPNAME; TMPNAME=$( mktemp -d ${DIR}.XXXXXXXXXX ) || exit 1
+  if [[ "${STAT}" == "" ]]; then
+    local TMPNAME; TMPNAME=$( mktemp -d "${DIR}.XXXXXXXXXX" ) || exit 1
     chmod 755 "${TMPNAME}" || exit 1
     chown "${OWNER}" "${TMPNAME}" || exit 1
     if ! mv -T "${TMPNAME}" "${DIR}" 2> /dev/null; then
       rmdir "${TMPNAME}"
       # check for race with other apachectl
-      if [[ "$( LC_ALL=C stat -c %F:%U ${DIR} 2>/dev/null )" != "directory:${OWNER}" ]]; then
+      if [[ "$( LC_ALL=C stat -c %F:%U "${DIR}" 2>/dev/null )" != "directory:${OWNER}" ]]; then
         echo "Cannot create '${DIR}' with owner '${OWNER}'."
         echo "Please fix manually. Aborting."
         exit 1
@@ -145,8 +145,8 @@ mkdir_chown () {
 
 case "${ARGV[@]}" in
   start)
-    # ssl_scache shouldn't be here if we're just starting up.
-    # (this is bad if there are several apache2 instances running)
+    # "ssl_scache" shouldn't be here if we're just starting up.
+    # (This is bad if there are several apache2 instances running)
     rm -f "${APACHE_RUN_DIR:-/var/run/apache2}"/*ssl_scache*
 
     need_systemd=false
@@ -168,20 +168,20 @@ case "${ARGV[@]}" in
       systemctl start "${APACHE_SYSTEMD_SERVICE}"
     else
       unset APACHE_STARTED_BY_SYSTEMD
-      ${HTTPD} ${APACHE_ARGUMENTS} -k "${ARGV[@]}"
+      ${HTTPD} "${APACHE_ARGUMENTS}" -k "${ARGV[@]}"
     fi
 
     ERROR=$?
     ;;
   stop|graceful-stop)
-    ${HTTPD} ${APACHE_ARGUMENTS} -k "${ARGV[@]}"
+    ${HTTPD} "${APACHE_ARGUMENTS}" -k "${ARGV[@]}"
     ERROR=$?
     ;;
   restart|graceful)
-    if ${HTTPD} ${APACHE_ARGUMENTS} -t 2> /dev/null; then
-      ${HTTPD} ${APACHE_ARGUMENTS} -k "${ARGV[@]}"
+    if ${HTTPD} "${APACHE_ARGUMENTS}" -t 2> /dev/null; then
+      ${HTTPD} "${APACHE_ARGUMENTS}" -k "${ARGV[@]}"
     else
-      ${HTTPD} ${APACHE_ARGUMENTS} -t
+      ${HTTPD} "${APACHE_ARGUMENTS}" -t
     fi
     ERROR=$?
     ;;
@@ -192,7 +192,7 @@ case "${ARGV[@]}" in
     ERROR=2
     ;;
   configtest)
-    ${HTTPD} ${APACHE_ARGUMENTS} -t
+    ${HTTPD} "${APACHE_ARGUMENTS}" -t
     ERROR=$?
     ;;
   status)
@@ -202,7 +202,7 @@ case "${ARGV[@]}" in
     get_status
     ;;
   *)
-    ${HTTPD} ${APACHE_ARGUMENTS} "$@"
+    ${HTTPD} "${APACHE_ARGUMENTS}" "$@"
     ERROR=$?
 esac
 

@@ -1,4 +1,4 @@
-#! /usr/bin/perl
+#!/usr/bin/perl
 
 # a2query - Apache2 helper to retrieve configuration informations
 # Copyright (C) 2012 Arno Töll <debian@toell.net>

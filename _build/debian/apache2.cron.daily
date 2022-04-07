@@ -1,25 +1,26 @@
-#!/bin/sh
+#!/bin/bash
 
-# run htcacheclean if set to 'cron' mode
+# Run "htcacheclean" if set to 'cron' mode.
 
 set -e
 set -u
 
 type htcacheclean > /dev/null 2>&1 || exit 0
-[ -e /etc/default/apache-htcacheclean ] || exit 0
+[[ -e /etc/default/apache-htcacheclean ]] || exit 0
 
 
-# edit /etc/default/apache-htcacheclean to change this
+# Edit "/etc/default/apache-htcacheclean" to change this.
 HTCACHECLEAN_MODE=daemon
 HTCACHECLEAN_RUN=auto
 HTCACHECLEAN_SIZE=300M
 HTCACHECLEAN_PATH=/var/cache/apache2/mod_cache_disk
 HTCACHECLEAN_OPTIONS=""
 
+# shellcheck source=/dev/null
 . /etc/default/apache-htcacheclean
 
-[ "$HTCACHECLEAN_MODE" = "cron" ] || exit 0
+[[ "${HTCACHECLEAN_MODE}" == "cron" ]] || exit 0
 
-htcacheclean ${HTCACHECLEAN_OPTIONS}	\
-		-p${HTCACHECLEAN_PATH}	\
-		-l${HTCACHECLEAN_SIZE}
+htcacheclean "${HTCACHECLEAN_OPTIONS}" \
+  -p${HTCACHECLEAN_PATH} \
+  -l${HTCACHECLEAN_SIZE}

@@ -1,16 +1,8 @@
-apache2 (2.4.53-101) unstable; urgency=medium
+apache2 (2.4.53-1000) unstable; urgency=medium
 
-  * ADD: Package source.
+  * UPD: Rebuild by Package Store.
 
- -- Package Store <mail@z17.dev>  Fri, 25 Mar 2022 01:36:00 +0300
-
-apache2 (2.4.53-100) unstable; urgency=medium
-
-  * COMMIT: 'e576aaddefe509afb9009b62e06a3a8ba34d832f'.
-  * UPD: 'apache2ctl' to modern bash syntax.
-  * UPD: 'ask-for-passphrase' to modern bash syntax.
-
- -- Package Store <mail@z17.dev>  Thu, 24 Mar 2022 23:25:00 +0300
+ -- Package Store <pkgstore@mail.ru>  Wed, 06 Apr 2022 21:56:00 +0300
 
 apache2 (2.4.53-3) UNRELEASED; urgency=medium
 

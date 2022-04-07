@@ -27,7 +27,7 @@ prompt="Enter passphrase for SSL/TLS keys for '${sitename} (${keytype})':"
 # Apache gives us a pipe for stdin, but we want to
 # talk to apache's terminal.
 tty=$( tty < /proc/${PPID}/fd/0 )
-if [[ "${tty}" = "not a tty" ]]; then
+if [[ "${tty}" == "not a tty" ]]; then
   if [[ -x /bin/systemd-ask-password ]]; then
     exec /bin/systemd-ask-password --timeout=0 "${prompt}"
   elif [[ -x /bin/plymouth ]] && plymouth --ping; then
